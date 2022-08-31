@@ -1,0 +1,3 @@
+export const TOKEN_REFRESHED = 'TOKEN_REFRESHED';
+export const CURRENT_USER = 'CURRENT_USER';
+

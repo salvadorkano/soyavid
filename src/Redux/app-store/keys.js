@@ -1,0 +1,3 @@
+export const INITIALIZE = 'INITIALIZE';
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const OPEN_RESTAURANT = 'OPEN_RESTAURANT';
