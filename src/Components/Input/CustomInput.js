@@ -32,7 +32,7 @@ function InputComponent(props) {
       <View
         style={{
           flexDirection: 'row',
-          backgroundColor: style?.backgr ?? 'white',
+          backgroundColor: style?.backgr ?? colors.primary_cream,
           height: style?.height
             ? style?.height
             : global?.isTablet

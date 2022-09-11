@@ -7,6 +7,7 @@ import Auth from './AuthStack';
 import {useDispatch, useSelector} from 'react-redux';
 import {getInfo} from '../Functions/User/functions';
 import {refreshCurrentUser} from '../Redux/user-store/actions';
+import DrawerNavigator from './Drawer';
 const AppStack = createNativeStackNavigator();
 
 function App() {
@@ -54,7 +55,7 @@ function App() {
           // initialRouteName={token ? 'App' : 'Auth'}>
           initialRouteName={'Auth'}>
           <AppStack.Screen name="Auth" component={Auth} />
-          {/* <AppStack.Screen name="App" component={DrawerNavigator} /> */}
+          <AppStack.Screen name="App" component={DrawerNavigator} />
         </AppStack.Navigator>
       </View>
     </NavigationContainer>

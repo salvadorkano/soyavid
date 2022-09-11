@@ -7,6 +7,7 @@ import styles from './styles';
 function ButtonComponent(props) {
   return (
     <TouchableOpacity
+      disabled={props?.disabled}
       onPress={() => (props?.loading === true ? null : props?.onPress())}
       style={[
         props?.styleButton,

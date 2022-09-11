@@ -5,7 +5,7 @@ import {normalize} from '../../../Helpers/normalize';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.primary_cream,
+    backgroundColor: colors.white,
     flex: 1,
   },
   middleView: {
@@ -62,4 +62,5 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: '10%',
   },
+  styleError: {color: 'red', marginTop: 10, alignSelf: 'flex-end'},
 });

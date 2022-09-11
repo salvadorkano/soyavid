@@ -13,36 +13,37 @@ import styles from './Styles/recover';
 import stylesRegister from './Styles/register';
 import {useFocusEffect} from '@react-navigation/native';
 import InputComponent from '../../Components/Input/CustomInput';
-import logo_white from '../../Assets/Images/logos/logo_white.png';
 import {normalize} from '../../Helpers/normalize';
 import ButtonComponent from '../../Components/Button/button';
 import {colors} from '../../Assets/Colors/colors';
 import {resetPassword} from '../../Functions/User/functions';
 import CustomModal from '../../Components/Modal/ComponentModal';
+import logo from '../../Assets/Images/logos/soyavidIcon.png';
+import back_black from '../../Assets/Images/commons/back_black.png';
 
 function Recover(props) {
   const [mail, setMail] = useState('');
   const [text, setText] = useState('');
   const [modalVisible, setModal] = useState(false);
-  const [showPassText, setShowPass] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [validate, setValidate] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   function forgotPassword() {
     if (mail !== '') {
-      setLoading(true);
-      setShowPass(false);
-      resetPassword({email: mail}).then(res => {
-        setLoading(false);
-        if (res?.status === 'Ok') {
-          setText(res?.message);
-          setModal(true);
-        } else {
-          setText(res?.message);
-          setModal(true);
-        }
-      });
-    } else {
-      setShowPass(true);
+      props?.navigation.navigate('RestardPassword');
+
+      // setLoading(true);
+      // resetPassword({email: mail}).then(res => {
+      //   setLoading(false);
+      //   if (res?.status === 'Ok') {
+      //     setText(res?.message);
+      //     setModal(true);
+      //   } else {
+      //     setText(res?.message);
+      //     setModal(true);
+      //   }
+      // });
     }
   }
 
@@ -50,6 +51,21 @@ function Recover(props) {
     setModal(false);
     props?.navigation.navigate('RestardPassword');
   }
+
+  const validateEmail = textEmail => {
+    let string = textEmail.trim();
+    let reg =
+      /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (reg.test(string) === false) {
+      setMail(string);
+      setShowError(true);
+      setValidate(false);
+    } else {
+      setMail(string);
+      setShowError(false);
+      setValidate(true);
+    }
+  };
 
   return (
     <KeyboardAvoidingView behavior={'height'} style={[styles.container]}>
@@ -66,11 +82,18 @@ function Recover(props) {
           contentContainerStyle={stylesRegister.scroll}
           showsVerticalScrollIndicator={false}
           bounces={false}>
-          <Image
-            source={logo_white}
-            resizeMode="contain"
-            style={styles.image}
-          />
+          <TouchableOpacity onPress={() => props?.navigation.goBack()}>
+            <Image
+              resizeMode="contain"
+              style={{
+                width: normalize(30),
+                height: normalize(30),
+                marginTop: normalize(30),
+              }}
+              source={back_black}
+            />
+          </TouchableOpacity>
+          <Image source={logo} resizeMode="contain" style={styles.image} />
           <View style={styles.middleView}>
             <Text style={styles.topText}>Recupera tu contraseña</Text>
             <Text style={[styles.underText]}>
@@ -79,14 +102,13 @@ function Recover(props) {
             </Text>
             <InputComponent
               style={{top: normalize(40)}}
-              placeholder={'Correo Electrónico'}
-              onChange={val => {
-                setMail(val);
-              }}
+              value={mail}
+              placeholder={'Correo electrónico'}
+              onChange={value => validateEmail(value)}
             />
-            {showPassText ? (
-              <Text style={stylesRegister.textValidation}>
-                Es necesario el correo.
+            {showError ? (
+              <Text style={styles.styleError}>
+                Formato de correo incorrecto.
               </Text>
             ) : null}
             <TouchableOpacity
@@ -103,8 +125,13 @@ function Recover(props) {
           <View style={styles.bottomView}>
             <ButtonComponent
               loading={loading}
+              disabled={!validate}
               onPress={() => (loading ? null : forgotPassword())}
-              styleButton={{backgroundColor: colors.salmon}}
+              styleButton={
+                validate
+                  ? {backgroundColor: colors.salmon}
+                  : {backgroundColor: colors.down_gray}
+              }
               buttonText={'Enviar'}
             />
             <ButtonComponent
@@ -115,15 +142,6 @@ function Recover(props) {
               }}
               onPress={() => props?.navigation.navigate('RestardPassword')}
               buttonText={'Tengo un codigo'}
-            />
-            <ButtonComponent
-              styleButton={{
-                backgroundColor: colors.primary_cream,
-                letterColor: colors.brown,
-                top: normalize(15),
-              }}
-              onPress={() => props?.navigation.navigate('Login')}
-              buttonText={'Volver a Inicio de Sesión'}
             />
           </View>
         </ScrollView>

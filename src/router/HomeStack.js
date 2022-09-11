@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Home from '../screens/Home/Home';
-import ProfileScreen from '../screens/Profile/Profile';
-import PromotionsScreen from '../screens/ Promotions/ Promotions';
-import AvailabilityScreen from '../screens/Availability/Availability';
+// import ProfileScreen from '../screens/Profile/Profile';
+// import PromotionsScreen from '../screens/ Promotions/ Promotions';
+// import AvailabilityScreen from '../screens/Availability/Availability';
 // import PlansSreen from '../screens/RegisterSteps/Plans/plans';
 // import Payment from '../screens/RegisterSteps/Payment 01/method';
 // import Description from '../screens/RegisterSteps/Description 02/description';
@@ -36,8 +36,8 @@ function HomeStack() {
       }}
       initialRouteName="HomeScreen">
       <HomeNav.Screen name="HomeScreen" component={Home} />
-      <HomeNav.Screen name="Profile" component={ProfileScreen} />
-      <HomeNav.Screen name="Promotions" component={PromotionsScreen} />
+      {/* <HomeNav.Screen name="Profile" component={ProfileScreen} />
+      <HomeNav.Screen name="Promotions" component={PromotionsScreen} /> */}
 
       {/* <HomeNav.Screen name="Plans" component={PlansSreen} />
       <HomeNav.Screen name="1" component={Payment} />

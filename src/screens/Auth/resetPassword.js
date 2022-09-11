@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   View,
@@ -16,7 +16,7 @@ import ButtonComponent from '../../Components/Button/button';
 import {colors} from '../../Assets/Colors/colors';
 import CustomModal from '../../Components/Modal/ComponentModal';
 import {setNewPassword} from '../../Functions/User/functions';
-import logo_red from '../../Assets/Images/logos/logo_red.png';
+import logo from '../../Assets/Images/logos/soyavidIcon.png';
 
 function RestardPassword(props) {
   const [code, setCode] = useState('');
@@ -27,29 +27,40 @@ function RestardPassword(props) {
   const [showPassText, setShowPass] = useState(false);
   const [responseModal, setResponseModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [validate, setValidate] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    if (code === '' || mail === '' || pass === '') {
+      setValidate(false);
+    } else {
+      setValidate(true);
+    }
+  }, [code, mail, pass]);
 
   function changePassword() {
     if (code === '' || mail === '' || pass === '') {
       setText('Por favor llena todos los campos');
       setModal(true);
     } else {
-      setLoading(true);
-      setNewPassword({
-        code: code,
-        email: mail,
-        password: pass,
-      }).then(res => {
-        setLoading(false);
-        if (res?.status === 'Ok') {
-          setText(res?.message);
-          setModal(true);
-          setResponseModal(true);
-        } else {
-          setText(res?.message);
-          setModal(true);
-          setResponseModal(false);
-        }
-      });
+      // setLoading(true);
+      props?.navigation.navigate('Login');
+      // setNewPassword({
+      //   code: code,
+      //   email: mail,
+      //   password: pass,
+      // }).then(res => {
+      //   setLoading(false);
+      //   if (res?.status === 'Ok') {
+      //     setText(res?.message);
+      //     setModal(true);
+      //     setResponseModal(true);
+      //   } else {
+      //     setText(res?.message);
+      //     setModal(true);
+      //     setResponseModal(false);
+      //   }
+      // });
     }
   }
 
@@ -59,6 +70,21 @@ function RestardPassword(props) {
       props?.navigation.navigate('Login');
     }
   }
+
+  const validateEmail = textEmail => {
+    let string = textEmail.trim();
+    let reg =
+      /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (reg.test(string) === false) {
+      setMail(string);
+      setShowError(true);
+      setValidate(false);
+    } else {
+      setMail(string);
+      setShowError(false);
+      setValidate(true);
+    }
+  };
 
   return (
     <KeyboardAvoidingView behavior={'height'} style={[styles.container]}>
@@ -76,7 +102,7 @@ function RestardPassword(props) {
           showsVerticalScrollIndicator={false}
           bounces={false}>
           <Image
-            source={logo_red}
+            source={logo}
             resizeMode="contain"
             style={[styles.img, styles.topDistance]}
           />
@@ -84,12 +110,14 @@ function RestardPassword(props) {
             <Text style={styles.topText}>Cambiar contraseña</Text>
             <InputComponent
               value={mail}
-              onChange={val => {
-                setMail(val);
-                setShowPass(false);
-              }}
-              placeholder={'Correo Electrónico'}
+              onChange={value => validateEmail(value)}
+              placeholder={'Correo electrónico'}
             />
+            {showError ? (
+              <Text style={styles.styleError}>
+                Formato de correo incorrecto.
+              </Text>
+            ) : null}
             <InputComponent
               value={pass}
               onChange={val => {
@@ -116,8 +144,13 @@ function RestardPassword(props) {
           <View style={styles.bottomView}>
             <ButtonComponent
               loading={loading}
+              disabled={!validate}
               onPress={() => (loading ? null : changePassword())}
-              styleButton={{backgroundColor: colors.salmon, top: normalize(5)}}
+              styleButton={
+                validate
+                  ? {backgroundColor: colors.salmon, top: normalize(5)}
+                  : {backgroundColor: colors.down_gray, top: normalize(5)}
+              }
               buttonText={'Cambiar contraseña'}
             />
             <Text style={[styles.centerText, styles.textAccount]}>
@@ -126,7 +159,7 @@ function RestardPassword(props) {
 
             <ButtonComponent
               onPress={() => props?.navigation.navigate('Login')}
-              buttonText={'Inicia Sesión aquí'}
+              buttonText={'Inicia sesión aquí'}
             />
           </View>
         </ScrollView>

@@ -6,7 +6,7 @@ import {fonts} from '../../../Assets/Fonts/fonts';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.primary_cream,
+    backgroundColor: colors.white,
     flex: 1,
   },
   scroll: {
@@ -20,7 +20,7 @@ export default StyleSheet.create({
     alignSelf: 'center',
   },
   topDistance20: {
-    marginTop: '20%',
+    marginTop: normalize(20),
   },
   topDistance: {
     marginTop: '10%',
@@ -42,6 +42,7 @@ export default StyleSheet.create({
   textAccount: {paddingVertical: '4%', marginTop: normalize(5)},
   middleView: {
     flex: 2,
+    marginBottom: normalize(20),
   },
   bottomView: {
     flex: 1,
@@ -58,4 +59,5 @@ export default StyleSheet.create({
     alignSelf: 'center',
     fontFamily: fonts.epilogueRegular,
   },
+  styleError: {color: 'red', marginTop: 10, alignSelf: 'flex-end'},
 });

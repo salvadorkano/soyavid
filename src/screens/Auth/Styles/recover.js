@@ -5,7 +5,7 @@ import {normalize} from '../../../Helpers/normalize';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.brown,
+    backgroundColor: colors.white,
     flex: 1,
   },
   middleView: {
@@ -20,31 +20,30 @@ export default StyleSheet.create({
     width: normalize(150),
     height: normalize(160),
     alignSelf: 'center',
-    marginTop: '10%',
   },
   textBold: {
     fontFamily: fonts.epilogueBold,
   },
   topText: {
     fontSize: normalize(18),
-    color: 'white',
+    color: colors.black,
     alignSelf: 'center',
-    fontFamily: 'Epilogue-Bold',
+    fontFamily: fonts.epilogueBold,
   },
   underText: {
     fontSize: normalize(12),
     paddingTop: normalize(10),
-    color: 'white',
+    color: colors.black,
     alignSelf: 'center',
-    fontFamily: 'Epilogue-Medium',
+    fontFamily: fonts.epilogueMedium,
     textAlign: 'center',
   },
 
   centerText: {
     fontSize: normalize(12),
-    color: 'white',
+    color: colors.black,
     alignSelf: 'center',
-    fontFamily: 'Epilogue-Regular',
+    fontFamily: fonts.epilogueRegular,
   },
   bttomText: {
     fontSize: normalize(12),
@@ -53,4 +52,5 @@ export default StyleSheet.create({
     marginRight: normalize(9),
     paddingTop: normalize(14),
   },
+  styleError: {color: 'red', marginTop: 10, alignSelf: 'flex-end'},
 });

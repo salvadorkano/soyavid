@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import styles from './Styles/loginstyle';
 import {useFocusEffect} from '@react-navigation/native';
-import logo_red from '../../Assets/Images/logos/logo_red.png';
+import logo from '../../Assets/Images/logos/soyavidIcon.png';
 import {normalize} from '../../Helpers/normalize';
 import ButtonComponent from '../../Components/Button/button';
 import {colors} from '../../Assets/Colors/colors';
@@ -30,8 +30,6 @@ import {
   refreshCurrentUser,
 } from '../../Redux/user-store/actions';
 import {StackActions} from '@react-navigation/native';
-
-const CELL_COUNT = 4;
 
 function VerifyCode(props) {
   const {mail, pass} = props.route.params;
@@ -117,7 +115,7 @@ function VerifyCode(props) {
           contentContainerStyle={styles.containerScroll}
           showsVerticalScrollIndicator={false}
           bounces={false}>
-          <Image source={logo_red} resizeMode="contain" style={styles.img} />
+          <Image source={logo} resizeMode="contain" style={styles.img} />
           <View style={styles.middleView}>
             <Text style={styles.topText}>Ingresa el código</Text>
 
