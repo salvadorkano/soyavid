@@ -1,33 +1,12 @@
 import {DrawerActions} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  Image,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {colors} from '../../Assets/Colors/colors';
 import menu from '../../Assets/Images/commons/menu.png';
 import {normalize} from '../../Helpers/normalize';
 import styles from './style';
-import {height} from '../../Helpers/dimensions';
-import ButtonComponent from '../../Components/Button/button';
-import InputComponent from '../../Components/Input/CustomInput';
-import drop from '../../Assets/Images/commons/drop.png';
-import {
-  getCuisineTypes,
-  getProfile,
-  updateProfile,
-} from '../../Functions/User/functions';
-// import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {updateProfile} from '../../Functions/User/functions';
 import moment from 'moment';
-// import RNPickerSelect from 'react-native-picker-select';
-import CustomModal from '../../Components/Modal/ComponentModal';
-import add from '../../Assets/Images/commons/add.png';
-import ListComponent from '../../Components/ElementsList/list';
 
 function ProfileScreen({navigation, route}) {
   const [loading, setLoading] = useState(true);

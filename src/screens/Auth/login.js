@@ -159,10 +159,10 @@ function Login(props) {
             </Text>
 
             <ButtonComponent
-              // onPress={() => props?.navigation.navigate('Register')}
-              onPress={() =>
-                props?.navigation.dispatch(StackActions.replace('App'))
-              }
+              onPress={() => props?.navigation.navigate('Register')}
+              // onPress={() =>
+              //   props?.navigation.dispatch(StackActions.replace('App'))
+              // }
               buttonText={'Regístrate aquí'}
             />
           </View>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {View, Text} from 'react-native';
 import {colors} from '../../../Assets/Colors/colors';
 import {normalize} from '../../../Helpers/normalize';

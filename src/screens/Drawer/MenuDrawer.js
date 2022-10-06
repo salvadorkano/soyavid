@@ -7,7 +7,6 @@ import back_white from '../../Assets/Images/commons/back_white.png';
 import {images} from './images';
 import rest from '../../Assets/Images/Drawer/rest.png';
 import close from '../../Assets/Images/Drawer/close.png';
-import config from '../../Assets/Images/Drawer/config.png';
 import {useDispatch, useSelector} from 'react-redux';
 import {onLogOut} from '../../Redux/app-store/actions';
 
@@ -120,29 +119,6 @@ function MenuDrawerNav(props) {
       </View>
 
       <View style={[styles.bottomView]}>
-        {/* <TouchableOpacity
-          style={styles.touchableConfig}
-          onPress={() =>
-            app?.restaurantOpen !== null
-              ? navigation.navigate('Configuration')
-              : {}
-          }>
-          <View style={styles.containerConfig}>
-            <Image
-              resizeMode="contain"
-              style={styles.imgConfig(showCompleteDrawer)}
-              source={config}
-            />
-            <Text
-              style={[
-                styles.textPrincp,
-                styles.bold,
-                styles.textConfigvalidation(showCompleteDrawer),
-              ]}>
-              Configuración
-            </Text>
-          </View>
-        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={() => logoutAsync()}
           style={styles.touchableOut}>
