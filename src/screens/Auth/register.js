@@ -18,32 +18,21 @@ import ButtonComponent from '../../Components/Button/button';
 import {colors} from '../../Assets/Colors/colors';
 import CustomModal from '../../Components/Modal/ComponentModal';
 import {asyncRegister} from '../../Functions/User/functions';
-import moment from 'moment';
 import back_black from '../../Assets/Images/commons/back_black.png';
 
 function Register(props) {
   const [name, setName] = useState('');
   const [mail, setMail] = useState('');
   const [phone, setPhone] = useState('');
-  const [birthdate, setBirthdate] = useState('');
   const [pass, setPass] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
   const [modalVisible, setModal] = useState(false);
-  // const [checked, setCheck] = useState(false);
   const [text, setText] = useState();
   const [showPassText, setShowPass] = useState(false);
-  const [show, setShow] = useState(false);
   const [validate, setValidate] = useState(false);
-  const selectedDate = new Date('1991-01-01');
 
   useEffect(() => {
-    if (
-      name === '' ||
-      mail === '' ||
-      // birthdate === '' ||
-      pass === '' ||
-      confirmPass === ''
-    ) {
+    if (name === '' || mail === '' || pass === '' || confirmPass === '') {
       setValidate(false);
     } else {
       setValidate(true);
@@ -51,73 +40,43 @@ function Register(props) {
   }, [name, mail, pass, confirmPass]);
 
   function onRegister() {
-    if (
-      name === '' ||
-      mail === '' ||
-      // birthdate === '' ||
-      pass === '' ||
-      confirmPass === ''
-    ) {
+    if (name === '' || mail === '' || pass === '' || confirmPass === '') {
       setText('Por favor llena todos los campos.');
       setModal(true);
     } else if (pass !== confirmPass) {
       setText('La contraseña es diferente.');
       setModal(true);
-    }
-    // else if (checked === false) {
-    //   setText('Para crear una cuenta acepta los Términos y condiciones.');
-    //   setModal(true);
-    // }
-    else {
-      setTimeout(() => {
-        props?.navigation.navigate('VerifyCode', {
-          mail: mail,
-          pass: pass,
-        });
-      }, 650);
-      // let body = {
-      //   fullName: name,
-      //   email: mail,
-      //   password: pass,
-      //   tel: phone,
-      //   birthdate: birthdate,
-      // };
-      // asyncRegister(body).then(res => {
-      //   if (
-      //     res?.status === 'Ok' ||
-      //     res?.message === 'El correo electrónico ya se encuentra registrado'
-      //   ) {
-      //     setText(res?.message);
-      //     setModal(true);
-      //     setTimeout(() => {
-      //       props?.navigation.navigate('VerifyCode', {
-      //         mail: mail,
-      //         pass: pass,
-      //       });
-      //     }, 650);
-      //   } else {
-      //     setText(res?.message);
-      //     setModal(true);
-      //   }
-      // });
+    } else {
+      let body = {
+        fullName: name,
+        email: mail,
+        password: pass,
+        phone: phone,
+      };
+      asyncRegister(body).then(res => {
+        if (
+          res?.status === 200 &&
+          res?.message === 'User Created Successfully'
+        ) {
+          setText('Correo registrado exitosamente.');
+          setModal(true);
+        } else {
+          setText(res?.message);
+          setModal(true);
+        }
+      });
     }
   }
-
-  const showDatepicker = () => {
-    setShow(!show);
-  };
-
-  const handleConfirm = newDate => {
-    const formatted = moment(newDate).format('YYYY/MM/DD');
-    setBirthdate(formatted);
-    setShow(!show);
-  };
 
   return (
     <KeyboardAvoidingView behavior={'height'} style={[styles.container]}>
       <CustomModal
         text={text}
-        onClose={() => setModal(false)}
+        onClose={() => {
+          setModal(false);
+          if (text === 'Correo registrado exitosamente.')
+            props?.navigation.goBack();
+        }}
         nav={props?.navigation}
         visible={modalVisible}
         type={'ALERT'}
@@ -166,14 +125,6 @@ function Register(props) {
               }}
               placeholder={'Teléfono'}
             />
-            {/* <TouchableOpacity onPress={() => setShow(true)}>
-              <InputComponent
-                value={birthdate}
-                editable={false}
-                selectTextOnFocus={false}
-                placeholder={'Fecha de Nacimiento'}
-              />
-            </TouchableOpacity> */}
             <InputComponent
               value={pass}
               onChange={val => {
@@ -197,16 +148,7 @@ function Register(props) {
                 Mínimo 8 caracteres, 1 mayúscula y 1 caracter especial
               </Text>
             ) : null}
-            {/* <View style={styles.viewCheck}>
-              <Text style={[styles.centerText]}>
-                Acepto los {''}
-                <Text style={[styles.centerText, styles.bold]}>
-                  Términos y Condiciones
-                </Text>
-              </Text>
-            </View> */}
           </View>
-
           <View style={styles.bottomView}>
             <ButtonComponent
               onPress={() => onRegister()}

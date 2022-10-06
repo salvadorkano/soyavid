@@ -1,5 +1,5 @@
 export default {
   endpoints: {
-    test_api: 'https://resermania.testingmetodika.com/api/',
+    test_api: 'https://soyavid-back.vercel.app/api/',
   },
 };

@@ -9,7 +9,7 @@ export async function asyncLogin(data) {
 
 //Register new account
 export async function asyncRegister(data) {
-  return await apiFetch('Customer/Account/Create', 'POST', data)
+  return await apiFetch('users', 'POST', data)
     .then(response => response)
     .catch(err => err);
 }
