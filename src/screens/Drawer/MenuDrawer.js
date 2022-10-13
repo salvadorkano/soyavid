@@ -28,7 +28,7 @@ function MenuDrawerNav(props) {
     },
     {
       name: 'Carrito',
-      action: 'Orders',
+      action: 'Shopping',
       icon: images.orders,
     },
   ];

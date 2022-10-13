@@ -6,6 +6,7 @@ import MenuDrawerNav from '../screens/Drawer/MenuDrawer';
 import {useSelector} from 'react-redux';
 import HomeStack from './HomeStack';
 import ProfileScreen from '../screens/Profile/Profile';
+import ShoppingScreen from '../screens/Shopping/Shopping';
 
 const Drawer = createDrawerNavigator();
 
@@ -37,21 +38,7 @@ export default function DrawerNavigator({navigation, route}) {
       }}>
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="Profile" component={ProfileScreen} />
-
-      {/* <Drawer.Screen name="MainStack" component={MainStackScreen} />
-      <Drawer.Screen
-        name="RestaurantDetail"
-        component={RestaurantDetailScreen}
-      />
-      <Drawer.Screen name="ReservationScreen" component={ReservationScreen} />
-      <Drawer.Screen name="PreOrder" component={PreOrderScreen} />
-      <Drawer.Screen name="ConfirmOrder" component={ConfirmOrderScreen} />
-      <Drawer.Screen name="Profile" component={ProfileScreen} />
-      <Drawer.Screen name="Promotions" component={PromotionsScreen} />
-      <Drawer.Screen name="Availability" component={AvailabilityScreen} />
-      <Drawer.Screen name="ListAwait" component={ListAwaitScreen} />
-      <Drawer.Screen name="Review" component={ReviewScreen} />
-      <Drawer.Screen name="Chat" component={ChatScreen} /> */}
+      <Drawer.Screen name="Shopping" component={ShoppingScreen} />
     </Drawer.Navigator>
   );
 }

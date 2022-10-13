@@ -52,6 +52,8 @@ function Login(props) {
       setData('Por favor llena todos los campos');
       setModal(true);
     } else {
+      dispatch(refreshCurrentUser('token'));
+      dispatch(onRefreshToken('token'));
       props?.navigation.dispatch(StackActions.replace('App'));
       // setLoading(true);
       // let body = {

@@ -1,4 +1,4 @@
-import {INITIALIZE, USER_LOGOUT, OPEN_RESTAURANT} from './keys';
+import {INITIALIZE, USER_LOGOUT, OPEN_RESTAURANT, SHOPPING} from './keys';
 
 const initialState = {
   storeInitialized: false,
@@ -7,7 +7,7 @@ const initialState = {
   restaurantOpen: null,
 };
 
-export default function RappReducer(state = initialState, action) {
+export default function appReducer(state = initialState, action) {
   switch (action.type) {
     case INITIALIZE: {
       return {

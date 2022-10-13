@@ -1,13 +1,32 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '../../Assets/Colors/colors';
+import {fonts} from '../../Assets/Fonts/fonts';
 import {normalize} from '../../Helpers/normalize';
 
 export default StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    paddingVertical: '3%',
-    paddingBottom: '6%',
+  },
+  containerHeader: {backgroundColor: '#FFFF', marginVertical: normalize(20)},
+  styleError: {color: 'red', marginTop: 10, alignSelf: 'flex-end'},
+  presstableTime: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    height: normalize(45),
+    width: '100%',
+    marginTop: normalize(14),
+    borderRadius: normalize(8),
+    alignItems: 'center',
+    paddingHorizontal: normalize(17),
+    justifyContent: 'space-between',
+  },
+  rowText: {
+    fontFamily: fonts.epilogueRegular,
+    color: 'black',
+    fontSize: normalize(5),
+    alignSelf: 'center',
+    paddingVertical: normalize(3),
   },
   distanceTop: {
     marginTop: '5%',
@@ -50,15 +69,5 @@ export default StyleSheet.create({
     color: colors.black,
     fontFamily: 'Epilogue-Bold',
     fontSize: normalize(14),
-  },
-  float: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    // backgroundColor: '#ee6e73',
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    justifyContent: 'center',
   },
 });
